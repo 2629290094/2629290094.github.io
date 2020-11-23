@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="学习MySQL时的一些常用命令记录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql基本语句">
+<meta property="og:url" content="http://yoursite.com/2020/10/27/mysql%E5%9F%BA%E6%9C%AC%E8%AF%AD%E5%8F%A5/index.html">
+<meta property="og:site_name" content="冰花雨的博客">
+<meta property="og:description" content="学习MySQL时的一些常用命令记录">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-27T13:59:35.000Z">
+<meta property="article:modified_time" content="2020-11-23T16:21:12.888Z">
+<meta property="article:author" content="何世龙">
+<meta property="article:tag" content="没有明天,活在当下">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/10/27/mysql%E5%9F%BA%E6%9C%AC%E8%AF%AD%E5%8F%A5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>mysql基本语句 | 冰花雨的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">冰花雨的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">记录学习笔记</p>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-图片">
+
+    <a href="/pictures/" rel="section"><i class="fa fa-fw fa-picture-o"></i>图片</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/27/mysql%E5%9F%BA%E6%9C%AC%E8%AF%AD%E5%8F%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/%E6%B1%9F%E9%A3%8E.JPG">
+      <meta itemprop="name" content="何世龙">
+      <meta itemprop="description" content="南理大二学生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="冰花雨的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          mysql基本语句
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-27 21:59:35" itemprop="dateCreated datePublished" datetime="2020-10-27T21:59:35+08:00">2020-10-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-24 00:21:12" itemprop="dateModified" datetime="2020-11-24T00:21:12+08:00">2020-11-24</time>
+              </span>
+
+          
+            <div class="post-description">学习MySQL时的一些常用命令记录</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h1><pre><code>mysql -uroot -p
+service mysql start</code></pre><h1 id="查看用户"><a href="#查看用户" class="headerlink" title="查看用户"></a>查看用户</h1><pre><code>select user,host from mysql.user;</code></pre><h1 id="查看启动"><a href="#查看启动" class="headerlink" title="查看启动"></a>查看启动</h1><pre><code>ps -aux |grep mysql</code></pre><h1 id="显示连接"><a href="#显示连接" class="headerlink" title="显示连接"></a>显示连接</h1><pre><code>show processlist;</code></pre><h1 id="创建一个库"><a href="#创建一个库" class="headerlink" title="创建一个库"></a>创建一个库</h1><pre><code>create database abc;</code></pre><h1 id="进入库"><a href="#进入库" class="headerlink" title="进入库"></a>进入库</h1><pre><code>use abc;</code></pre><h1 id="创建一个表"><a href="#创建一个表" class="headerlink" title="创建一个表"></a>创建一个表</h1><pre><code>create table abc(
+
+);</code></pre><h1 id="创建带字符集的库"><a href="#创建带字符集的库" class="headerlink" title="创建带字符集的库"></a>创建带字符集的库</h1><pre><code>create database abc charset utf8 collate utf8mb4_general_ci;</code></pre><h1 id="查看支持字符集"><a href="#查看支持字符集" class="headerlink" title="查看支持字符集"></a>查看支持字符集</h1><pre><code>show charset;</code></pre><h1 id="查看校对"><a href="#查看校对" class="headerlink" title="查看校对"></a>查看校对</h1><pre><code>show collation;</code></pre><h1 id="删除一个库"><a href="#删除一个库" class="headerlink" title="删除一个库"></a>删除一个库</h1><pre><code>drop database abc;</code></pre><h1 id="展示库"><a href="#展示库" class="headerlink" title="展示库"></a>展示库</h1><pre><code>show databases;</code></pre><h1 id="展示表列属性"><a href="#展示表列属性" class="headerlink" title="展示表列属性"></a>展示表列属性</h1><pre><code>desc abc;</code></pre><h1 id="展示创表属性"><a href="#展示创表属性" class="headerlink" title="展示创表属性"></a>展示创表属性</h1><pre><code>show create table abc;</code></pre><h1 id="展示建库语句"><a href="#展示建库语句" class="headerlink" title="展示建库语句"></a>展示建库语句</h1><pre><code>show create database abc;</code></pre><h1 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h1><pre><code>create user abc@&quot;%&quot; identified by &apos;123&apos;;</code></pre><h1 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h1><pre><code>alter user abc@&quot;%&quot; identified by &apos;456&apos;;</code></pre><h1 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h1><pre><code>drop user abc@&apos;%&apos;;</code></pre><h1 id="设置权限"><a href="#设置权限" class="headerlink" title="设置权限"></a>设置权限</h1><pre><code>grant(权限)on(权限作用范围)to(用户);
+grant all on abc.* to abc@&apos;%&apos;;</code></pre><h1 id="展示权限"><a href="#展示权限" class="headerlink" title="展示权限"></a>展示权限</h1><pre><code>show grants for abc@&apos;%&apos;;</code></pre><h1 id="收回权限"><a href="#收回权限" class="headerlink" title="收回权限"></a>收回权限</h1><pre><code>revoke (权限) on  (权限作用范围)from(用户);</code></pre><h1 id="开启-关闭数据库"><a href="#开启-关闭数据库" class="headerlink" title="开启/关闭数据库"></a>开启/关闭数据库</h1><pre><code>systemctl star/stop mysql</code></pre><h1 id="忘记root密码"><a href="#忘记root密码" class="headerlink" title="忘记root密码"></a>忘记root密码</h1><pre><code>mysqld_safe --skip-grant-tables --skip-networking &amp;
+flush privileges;
+alter......</code></pre><h1 id="免交互执行命令"><a href="#免交互执行命令" class="headerlink" title="免交互执行命令"></a>免交互执行命令</h1><pre><code>-e 例:mysql -u -p -e &apos;select user,host from mysql.user;&apos;</code></pre><h1 id="导入SQL脚本"><a href="#导入SQL脚本" class="headerlink" title="导入SQL脚本"></a>导入SQL脚本</h1><pre><code>sourse </code></pre><h1 id="表的修改-为列"><a href="#表的修改-为列" class="headerlink" title="表的修改 ~为列"></a>表的修改 ~为列</h1><p>1.添加列</p>
+<pre><code>alter table abc add ~;</code></pre><p>2.在某列后面添加列</p>
+<pre><code>alter table abc add ~ after ~;</code></pre><p>3.在第一列前面加一列</p>
+<pre><code>alter table abc add ~ first;</code></pre><p>4.删除列</p>
+<pre><code>alter table abc drop 列名;</code></pre><p>5.修改列的类型</p>
+<pre><code>alter table abc modify ~;</code></pre><p>6.修改列</p>
+<pre><code>alter table abc change 列名 ~;</code></pre><p>7.创建一个相同结构空表</p>
+<pre><code>create table abc like def;</code></pre><p>8.插入值</p>
+<pre><code>insert into abc(列1名,列2名,列3名) values
+(值1,值2,值3);
+
+
+insert into goods_cates(name) select cate_name from goods group by cate_name;</code></pre><p>9.同时插入多行</p>
+<pre><code>insert into abc(列1名,列2名,列3名) values
+(值1,值2,值3),
+(值1,值2,值3);</code></pre><p>10.查看表信息</p>
+<pre><code>select * from abc; </code></pre><p>11.更新表的值</p>
+<pre><code>update students set sname=&apos;qaq&apos; where id=1;
+
+update goods as g inner join goods_cates as c on g.cate_name=c.name set g.cate_name=c.id;</code></pre><p>12.删除数据(逻辑)</p>
+<pre><code>delete from students where id=1;</code></pre><p>13.删除数据(物理)</p>
+<pre><code>truncate table stu;</code></pre><p>14.伪删除</p>
+<p>用update 代替delete;</p>
+<h1 id="DQL-数据查询语言"><a href="#DQL-数据查询语言" class="headerlink" title="DQL(数据查询语言)"></a>DQL(数据查询语言)</h1><p>顺序<br>    select from where group by having order by limit</p>
+<p>select</p>
+<h2 id="单独使用"><a href="#单独使用" class="headerlink" title="单独使用"></a>单独使用</h2><p>–select @@xxx; 查看系统参数</p>
+<pre><code>select @@port;
+select @@basedir;
+select @@datadir;
+select @@socket;
+select @@server_id;</code></pre><p>–select 函数()</p>
+<pre><code>select now();
+select database();
+select user();
+select concat(&apos;hellow world&apos;);
+select group_concat(&apos;qwq&apos;);</code></pre><h2 id="单表子句-from"><a href="#单表子句-from" class="headerlink" title="单表子句-from"></a>单表子句-from</h2><pre><code>select 列1,列2 from 表
+select * from 表(不要对大表操作)</code></pre><h2 id="单表子句-where"><a href="#单表子句-where" class="headerlink" title="单表子句-where"></a>单表子句-where</h2><p>–where配合等值查询</p>
+<pre><code>select 列1,列2 from 表 where 列n=条件;</code></pre><p>–where配合比较操作符</p>
+<pre><code>select 列1,列2 from 表 where 列n &lt;(&gt;,!=,&gt;=,&lt;=) 条件</code></pre><p>–where配合逻辑运算符</p>
+<pre><code>select 列1,列2 from 表 where 列n 条件 and(or) 列m 条件</code></pre><p>–where配合模糊查询</p>
+<pre><code>select * from 表 where 列n like &apos;qwq%&apos;;(百分号不能放前面)</code></pre><p>–where配合in语句</p>
+<pre><code>select * from 表 where 列n in(条件1,条件2);</code></pre><p>–where配合between and</p>
+<pre><code>select * from 表 where 列n between num1 and num2;</code></pre><h2 id="单表子句-group-by"><a href="#单表子句-group-by" class="headerlink" title="单表子句-group by"></a>单表子句-group by</h2><p>例子1.统计city表每个国家的总人口数</p>
+<pre><code>select countrycode,sum(population) 
+from city
+group by countrycode</code></pre><p>例子2.统计中国,每个省的总人口数</p>
+<pre><code>select district,sum(population)
+from city 
+where countrycode = &quot;CHN&quot;
+group by district;</code></pre><p>例子3.统计世界上,每个国家的城市数量</p>
+<pre><code>select countrycode count(id)
+from city
+group by countrycode</code></pre><p>例子4.统计中国,每个省的城市列表</p>
+<pre><code>select district,group_concat(NAME)
+from city
+where countrycode = &apos;CHN&apos;
+group by district;</code></pre><h2 id="单表子句-having"><a href="#单表子句-having" class="headerlink" title="单表子句-having"></a>单表子句-having</h2><p>例子1.统计中国,每个省的总人口数,只打印总人口数小于100W的信息</p>
+<pre><code>select district,sum(population)
+from city 
+where countrycode = &quot;CHN&quot;
+group by district;
+having sum(population)&lt;10000000</code></pre><p>注意:having 条件是不走索引的.</p>
+<h2 id="单表子句-order-by"><a href="#单表子句-order-by" class="headerlink" title="单表子句-order by"></a>单表子句-order by</h2><p>例子1.查询中国的城市信息,并按人口数量从大到小进行排序</p>
+<pre><code>select * from city
+where countrycode = &apos;CHN&apos;
+order by population desc;</code></pre><p>例子2.统计中国每个省的总人口,找出大于500w的,并按总人口从大到小排序</p>
+<pre><code>select district sum(population)
+from city
+where countrycode = &apos;CHN&apos;
+group by district
+having population &gt; 5000000
+order by desc;</code></pre><h2 id="单表语句-limit"><a href="#单表语句-limit" class="headerlink" title="单表语句-limit"></a>单表语句-limit</h2><p>例子1.统计中国每个省的总人口,找出大于500w的,并按总人口从大到小排序,只显示前三名</p>
+<pre><code>select district sum(population)
+from city
+where countrycode = &apos;CHN&apos;
+group by district
+having population &gt; 5000000
+order by desc;
+limit 3;</code></pre><p>limit n,m<br>跳过前n名,再显示前m名</p>
+<h2 id="distinct"><a href="#distinct" class="headerlink" title="distinct()"></a>distinct()</h2><p>去重复</p>
+<pre><code>select distinct(countrycode) from city;</code></pre><h2 id="联合查询–union-all"><a href="#联合查询–union-all" class="headerlink" title="联合查询–union all"></a>联合查询–union all</h2><p>–中国或者美国城市信息</p>
+<pre><code>select * from city where countrycode = &apos;CHN&apos;
+union all
+select * from city where countrycode = &apos;USA&apos;;</code></pre><p>union 去重复</p>
+<p>min()<br>max()<br>count()<br>round(value,位数)<br>sum()</p>
+<h2 id="多表链接查询"><a href="#多表链接查询" class="headerlink" title="多表链接查询"></a>多表链接查询</h2><p>内链接（两表某字段的交集）</p>
+<pre><code>select s.Sno,s.cno,s.score,c.cname 
+from sc as s inner join course as c on s.cno=c.cno　order by c.cno,s.Sno;</code></pre><p>左链接（以左边为基准匹配，未找到为ＮＵＬＬ）</p>
+<pre><code>select s.Sno,s.cno,s.score,c.cname 
+from sc as s left join course as c on s.cno=c.cno　order by c.cno,s.Sno
+having s.cno is NULL;</code></pre><h2 id="自关联"><a href="#自关联" class="headerlink" title="自关联"></a>自关联</h2><p>自己关联自己的表（省市县，上下级）</p>
+<pre><code>select c.name,i.name from city as c inner join city as i 
+on c.id = i.pid order by c.id;</code></pre><h2 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h2><pre><code>select里嵌套select
+select * from city where pid = (select id from city where name=&apos;北京&apos;);</code></pre><h2 id="外键"><a href="#外键" class="headerlink" title="外键"></a>外键</h2><pre><code>alter table goods add foreign key(brand_id) references goods_brands(id);</code></pre>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8"><span class="nav-number">1.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%94%A8%E6%88%B7"><span class="nav-number">2.</span> <span class="nav-text">查看用户</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%90%AF%E5%8A%A8"><span class="nav-number">3.</span> <span class="nav-text">查看启动</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E8%BF%9E%E6%8E%A5"><span class="nav-number">4.</span> <span class="nav-text">显示连接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%BA%93"><span class="nav-number">5.</span> <span class="nav-text">创建一个库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9B%E5%85%A5%E5%BA%93"><span class="nav-number">6.</span> <span class="nav-text">进入库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E8%A1%A8"><span class="nav-number">7.</span> <span class="nav-text">创建一个表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%B8%A6%E5%AD%97%E7%AC%A6%E9%9B%86%E7%9A%84%E5%BA%93"><span class="nav-number">8.</span> <span class="nav-text">创建带字符集的库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%94%AF%E6%8C%81%E5%AD%97%E7%AC%A6%E9%9B%86"><span class="nav-number">9.</span> <span class="nav-text">查看支持字符集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%A0%A1%E5%AF%B9"><span class="nav-number">10.</span> <span class="nav-text">查看校对</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E4%B8%80%E4%B8%AA%E5%BA%93"><span class="nav-number">11.</span> <span class="nav-text">删除一个库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B1%95%E7%A4%BA%E5%BA%93"><span class="nav-number">12.</span> <span class="nav-text">展示库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B1%95%E7%A4%BA%E8%A1%A8%E5%88%97%E5%B1%9E%E6%80%A7"><span class="nav-number">13.</span> <span class="nav-text">展示表列属性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B1%95%E7%A4%BA%E5%88%9B%E8%A1%A8%E5%B1%9E%E6%80%A7"><span class="nav-number">14.</span> <span class="nav-text">展示创表属性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B1%95%E7%A4%BA%E5%BB%BA%E5%BA%93%E8%AF%AD%E5%8F%A5"><span class="nav-number">15.</span> <span class="nav-text">展示建库语句</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7"><span class="nav-number">16.</span> <span class="nav-text">创建用户</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81"><span class="nav-number">17.</span> <span class="nav-text">修改密码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7"><span class="nav-number">18.</span> <span class="nav-text">删除用户</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E6%9D%83%E9%99%90"><span class="nav-number">19.</span> <span class="nav-text">设置权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B1%95%E7%A4%BA%E6%9D%83%E9%99%90"><span class="nav-number">20.</span> <span class="nav-text">展示权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%94%B6%E5%9B%9E%E6%9D%83%E9%99%90"><span class="nav-number">21.</span> <span class="nav-text">收回权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E5%90%AF-%E5%85%B3%E9%97%AD%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">22.</span> <span class="nav-text">开启&#x2F;关闭数据库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BF%98%E8%AE%B0root%E5%AF%86%E7%A0%81"><span class="nav-number">23.</span> <span class="nav-text">忘记root密码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%8D%E4%BA%A4%E4%BA%92%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4"><span class="nav-number">24.</span> <span class="nav-text">免交互执行命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5SQL%E8%84%9A%E6%9C%AC"><span class="nav-number">25.</span> <span class="nav-text">导入SQL脚本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%A8%E7%9A%84%E4%BF%AE%E6%94%B9-%E4%B8%BA%E5%88%97"><span class="nav-number">26.</span> <span class="nav-text">表的修改 ~为列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DQL-%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2%E8%AF%AD%E8%A8%80"><span class="nav-number">27.</span> <span class="nav-text">DQL(数据查询语言)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E7%8B%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">27.1.</span> <span class="nav-text">单独使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E8%A1%A8%E5%AD%90%E5%8F%A5-from"><span class="nav-number">27.2.</span> <span class="nav-text">单表子句-from</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E8%A1%A8%E5%AD%90%E5%8F%A5-where"><span class="nav-number">27.3.</span> <span class="nav-text">单表子句-where</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E8%A1%A8%E5%AD%90%E5%8F%A5-group-by"><span class="nav-number">27.4.</span> <span class="nav-text">单表子句-group by</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E8%A1%A8%E5%AD%90%E5%8F%A5-having"><span class="nav-number">27.5.</span> <span class="nav-text">单表子句-having</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E8%A1%A8%E5%AD%90%E5%8F%A5-order-by"><span class="nav-number">27.6.</span> <span class="nav-text">单表子句-order by</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E8%A1%A8%E8%AF%AD%E5%8F%A5-limit"><span class="nav-number">27.7.</span> <span class="nav-text">单表语句-limit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#distinct"><span class="nav-number">27.8.</span> <span class="nav-text">distinct()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2%E2%80%93union-all"><span class="nav-number">27.9.</span> <span class="nav-text">联合查询–union all</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%A1%A8%E9%93%BE%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="nav-number">27.10.</span> <span class="nav-text">多表链接查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%85%B3%E8%81%94"><span class="nav-number">27.11.</span> <span class="nav-text">自关联</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="nav-number">27.12.</span> <span class="nav-text">子查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%96%E9%94%AE"><span class="nav-number">27.13.</span> <span class="nav-text">外键</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="何世龙"
+      src="/images/%E6%B1%9F%E9%A3%8E.JPG">
+  <p class="site-author-name" itemprop="name">何世龙</p>
+  <div class="site-description" itemprop="description">南理大二学生</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/2629290094" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;2629290094" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/385619040" title="BiliBili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;385619040" rel="noopener" target="_blank"><i class="fa fa-fw fa-tv-retro"></i>BiliBili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">何世龙</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v5.2.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>
