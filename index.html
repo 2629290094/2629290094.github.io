@@ -190,7 +190,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-11-24 18:18:22 / 修改时间：20:42:54" itemprop="dateCreated datePublished" datetime="2020-11-24T18:18:22+08:00">2020-11-24</time>
+              <time title="创建时间：2020-11-24 18:18:22 / 修改时间：23:48:08" itemprop="dateCreated datePublished" datetime="2020-11-24T18:18:22+08:00">2020-11-24</time>
             </span>
 
           
@@ -211,42 +211,14 @@
 <p>4.基本思路:  用两个指针分别指向数组两段,分别向中间移动,当左边遇到大于x的值停下,<br>右边遇到小于x的值停下,如果左指针在右指针的左边,两个数交换,直到两指针相遇</p>
 <p>5.算法模板:</p>
 </blockquote>
-<pre><code>void quick_sort(int q[],int l,int r)
-&#123;
-    //l表示最左端下标,r表示最右端下标
-
-    //排序完的条件
-    if(l &gt;= r)
-    &#123;
-        return;
-    &#125;
-
-    //1.找分界点,这里找q[l],i表示左指针,j表示右指针;
-    int x = q[l],i = l - 1,j = r + 1;
-
-    //2.调整区间
-    while(i &lt; j)
-    &#123;
-        do&#123;
-            i++;
-        &#125;while(q[i] &lt; x);
-
-        do&#123;
-            j--;
-        &#125;while(q[j] &gt; x);
-
-        if(i &lt; j)
-        &#123;
-            swap(q[i],q[j]);
-        &#125;
-    &#125;
-
-    //递归处理左右两段
-    quick_sort(q,l,j);
-
-    quick_sort(q,j + 1,r);
-
-&#125;</code></pre><h2 id="2-归并排序"><a href="#2-归并排序" class="headerlink" title="2.归并排序"></a>2.归并排序</h2><h1 id="二分"><a href="#二分" class="headerlink" title="二分"></a>二分</h1><h2 id="1-整数二分"><a href="#1-整数二分" class="headerlink" title="1.整数二分"></a>1.整数二分</h2><h2 id="2-浮点数二分"><a href="#2-浮点数二分" class="headerlink" title="2.浮点数二分"></a>2.浮点数二分</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/11/24/ACM%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
