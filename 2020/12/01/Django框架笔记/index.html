@@ -28,7 +28,7 @@
 <meta property="og:description" content="环境搭建  虚拟环境的创建和使用  安装虚拟环境">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-12-01T14:29:43.000Z">
-<meta property="article:modified_time" content="2020-12-03T16:22:56.395Z">
+<meta property="article:modified_time" content="2020-12-05T03:28:27.787Z">
 <meta property="article:author" content="何世龙">
 <meta property="article:tag" content="没有明天,活在当下">
 <meta name="twitter:card" content="summary">
@@ -197,7 +197,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-04 00:22:56" itemprop="dateModified" datetime="2020-12-04T00:22:56+08:00">2020-12-04</time>
+                <time title="修改时间：2020-12-05 11:28:27" itemprop="dateModified" datetime="2020-12-05T11:28:27+08:00">2020-12-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -427,6 +427,31 @@ mkdir booktest</code></pre></li>
 <p>  <em>\站位符,代码中要去掉</em></p>
 </li>
 </ul>
+<blockquote>
+<h2 id="MVT综合案例"><a href="#MVT综合案例" class="headerlink" title="MVT综合案例"></a>MVT综合案例</h2></blockquote>
+<ul>
+<li><p><strong>编码之前的准备工作</strong></p>
+<ol>
+<li><p>设计出访问页面的url和对应视图的名字,确定视图函数的功能</p>
+</li>
+<li><p>设计模板文件的名字</p>
+</li>
+</ol>
+</li>
+<li><p><strong>MVT之间关联</strong></p>
+<ol>
+<li><p>url和视图</p>
+<p> url中把需要传递给视图的参数用()括起来,可在视图中接收</p>
+</li>
+<li><p>视图和模型</p>
+<p> 视图中可以导入相应模型的类,通过类来读取对应数据,并传给模板</p>
+</li>
+<li><p>视图和模板</p>
+<p> 视图给模板传送数据时,用字典来传送,传过去的数据模板中可直接使用</p>
+</li>
+</ol>
+</li>
+</ul>
 
     </div>
 
@@ -505,7 +530,7 @@ mkdir booktest</code></pre></li>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">1.</span> <span class="nav-text">环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E7%9A%84%E5%88%9B%E5%BB%BA%E5%92%8C%E4%BD%BF%E7%94%A8"><span class="nav-number">1.1.</span> <span class="nav-text">虚拟环境的创建和使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Django%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%BA%94%E7%94%A8%E5%88%9B%E5%BB%BA"><span class="nav-number">1.2.</span> <span class="nav-text">Django项目和应用创建</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Django%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">Django的基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E7%B1%BB%E8%AE%BE%E8%AE%A1%E5%92%8C%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E7%94%9F%E6%88%90"><span class="nav-number">2.1.</span> <span class="nav-text">模型类设计和数据表的生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%A8%A1%E5%9E%8B%E7%B1%BB%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">通过模型类操作数据表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Django%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86"><span class="nav-number">2.3.</span> <span class="nav-text">Django后台管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE%E4%BD%BF%E7%94%A8"><span class="nav-number">2.4.</span> <span class="nav-text">视图使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E4%BD%BF%E7%94%A8"><span class="nav-number">2.5.</span> <span class="nav-text">模板使用</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">1.</span> <span class="nav-text">环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E7%9A%84%E5%88%9B%E5%BB%BA%E5%92%8C%E4%BD%BF%E7%94%A8"><span class="nav-number">1.1.</span> <span class="nav-text">虚拟环境的创建和使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Django%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%BA%94%E7%94%A8%E5%88%9B%E5%BB%BA"><span class="nav-number">1.2.</span> <span class="nav-text">Django项目和应用创建</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Django%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">Django的基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E7%B1%BB%E8%AE%BE%E8%AE%A1%E5%92%8C%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E7%94%9F%E6%88%90"><span class="nav-number">2.1.</span> <span class="nav-text">模型类设计和数据表的生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%A8%A1%E5%9E%8B%E7%B1%BB%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">通过模型类操作数据表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Django%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86"><span class="nav-number">2.3.</span> <span class="nav-text">Django后台管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE%E4%BD%BF%E7%94%A8"><span class="nav-number">2.4.</span> <span class="nav-text">视图使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E4%BD%BF%E7%94%A8"><span class="nav-number">2.5.</span> <span class="nav-text">模板使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVT%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B"><span class="nav-number">2.6.</span> <span class="nav-text">MVT综合案例</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
