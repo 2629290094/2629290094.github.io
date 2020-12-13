@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="pip是python中安装第三方库的方法,但有时候安装速度太慢,还可能导致超时出错,所以给pip提速就很重要了">
+  <meta name="description" content="使用source 命令时提示命令不存在需要source 的文件中source拼写错误 post请求时403错误 在settings.py里面的MIDDLEWARE_CLASSES中加入“‘django.middleware.csrf.CsrfResponseMiddleware’,”；  在settings.py里面的MIDDLEWARE_CLASSES中注释掉“‘django.middlewar">
 <meta property="og:type" content="article">
-<meta property="og:title" content="提升pip安装库的速度">
-<meta property="og:url" content="http://yoursite.com/2020/12/01/%E6%8F%90%E5%8D%87pip%E5%AE%89%E8%A3%85%E5%BA%93%E7%9A%84%E9%80%9F%E5%BA%A6/index.html">
+<meta property="og:title" content="Django报错记录">
+<meta property="og:url" content="http://yoursite.com/2020/12/11/Django%E6%8A%A5%E9%94%99%E5%8F%8A%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="冰花雨的博客">
-<meta property="og:description" content="pip是python中安装第三方库的方法,但有时候安装速度太慢,还可能导致超时出错,所以给pip提速就很重要了">
+<meta property="og:description" content="使用source 命令时提示命令不存在需要source 的文件中source拼写错误 post请求时403错误 在settings.py里面的MIDDLEWARE_CLASSES中加入“‘django.middleware.csrf.CsrfResponseMiddleware’,”；  在settings.py里面的MIDDLEWARE_CLASSES中注释掉“‘django.middlewar">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-12-01T09:11:13.000Z">
-<meta property="article:modified_time" content="2020-12-01T14:33:10.297Z">
+<meta property="article:published_time" content="2020-12-11T15:33:53.000Z">
+<meta property="article:modified_time" content="2020-12-13T16:45:58.202Z">
 <meta property="article:author" content="何世龙">
-<meta property="article:tag" content="pip">
+<meta property="article:tag" content="Django">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2020/12/01/%E6%8F%90%E5%8D%87pip%E5%AE%89%E8%A3%85%E5%BA%93%E7%9A%84%E9%80%9F%E5%BA%A6/">
+<link rel="canonical" href="http://yoursite.com/2020/12/11/Django%E6%8A%A5%E9%94%99%E5%8F%8A%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>提升pip安装库的速度 | 冰花雨的博客</title>
+  <title>Django报错记录 | 冰花雨的博客</title>
   
 
 
@@ -167,7 +167,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/01/%E6%8F%90%E5%8D%87pip%E5%AE%89%E8%A3%85%E5%BA%93%E7%9A%84%E9%80%9F%E5%BA%A6/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/11/Django%E6%8A%A5%E9%94%99%E5%8F%8A%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/%E6%B1%9F%E9%A3%8E.JPG">
@@ -180,7 +180,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          提升pip安装库的速度
+          Django报错记录
         </h1>
 
         <div class="post-meta">
@@ -189,10 +189,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-12-01 17:11:13 / 修改时间：22:33:10" itemprop="dateCreated datePublished" datetime="2020-12-01T17:11:13+08:00">2020-12-01</time>
+              <time title="创建时间：2020-12-11 23:33:53" itemprop="dateCreated datePublished" datetime="2020-12-11T23:33:53+08:00">2020-12-11</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-14 00:45:58" itemprop="dateModified" datetime="2020-12-14T00:45:58+08:00">2020-12-14</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -216,48 +222,32 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>pip是python中安装第三方库的方法,但有时候安装速度太慢,还可能导致超时出错,所以给pip提速就很重要了</p>
+        <h1 id="使用source-命令时提示命令不存在"><a href="#使用source-命令时提示命令不存在" class="headerlink" title="使用source 命令时提示命令不存在"></a>使用source 命令时提示命令不存在</h1><p>需要source 的文件中source拼写错误</p>
+<h1 id="post请求时403错误"><a href="#post请求时403错误" class="headerlink" title="post请求时403错误"></a>post请求时403错误</h1><ol>
+<li><p>在settings.py里面的MIDDLEWARE_CLASSES中加入“‘django.middleware.csrf.CsrfResponseMiddleware’,”；</p>
+</li>
+<li><p>在settings.py里面的MIDDLEWARE_CLASSES中注释掉“‘django.middleware.csrf.CsrfViewMiddleware’,”。</p>
+</li>
+</ol>
 <a id="more"></a>
 
-<p>pip提速方法一般有两种,一种是临时提速,一种是永久提速</p>
-<blockquote>
-<h1 id="临时提速"><a href="#临时提速" class="headerlink" title="临时提速"></a>临时提速</h1></blockquote>
-<p>在pip install 包名 后面加上-i + 镜像地址,这样pip安装时就会使用到国内的镜像源,速度飞起.</p>
-<p>国内主要的镜像地址如下:</p>
-<pre><code>清华：https://pypi.tuna.tsinghua.edu.cn/simple
-阿里云：http://mirrors.aliyun.com/pypi/simple/
-中国科技大学 https://pypi.mirrors.ustc.edu.cn/simple/
-华中理工大学：http://pypi.hustunique.com/
-山东理工大学：http://pypi.sdutlinux.org/
-豆瓣：http://pypi.douban.com/simple/</code></pre><p>所以临时提速格式如下:</p>
-<pre><code>pip install 包名 -i https://pypi.tuna.tsinghua.edu.cn/simple</code></pre><blockquote>
-<h1 id="永久提速"><a href="#永久提速" class="headerlink" title="永久提速"></a>永久提速</h1></blockquote>
-<p>每次临时复制镜像地址放在后面也挺麻烦的，所以接下来介绍永久提速的方法。做一下简单的配置即可完成</p>
-<h3 id="windows系统配置"><a href="#windows系统配置" class="headerlink" title="windows系统配置"></a>windows系统配置</h3><ol>
-<li><p>在 C:\Users\Administrator\pip 建一个文件 pip.ini如果Administrator 中 没有pip文件夹则自己新建一个，然后新建一个 pip.ini 文件</p>
-</li>
-<li><p>在pip.ini文件输入:</p>
-<pre><code>[global]
-index-url = https://pypi.douban.com/simple
+<h1 id="使用ajax时报错-TypeError-ajax-…-success-is-not-a-function"><a href="#使用ajax时报错-TypeError-ajax-…-success-is-not-a-function" class="headerlink" title="使用ajax时报错:TypeError: $.ajax(…) success is not a function"></a>使用ajax时报错:TypeError: $.ajax(…) success is not a function</h1><p>success放到ajax里面</p>
+<pre><code>&lt;script&gt;
+$.ajax(&#123;
+    type: &quot;GET&quot;,
+    url: &quot;/api/rooms&quot;,
+    success: function (rooms) &#123;
+    &#125;
+&#125;);
+&lt;/script&gt;</code></pre><h1 id="在视图中使用模型查询时报错-’str’-object-has-no-attribute-‘objects’"><a href="#在视图中使用模型查询时报错-’str’-object-has-no-attribute-‘objects’" class="headerlink" title="在视图中使用模型查询时报错:’str’ object has no attribute ‘objects’"></a>在视图中使用模型查询时报错:’str’ object has no attribute ‘objects’</h1><p>在模型中定义类时,类名要大写</p>
+<h1 id="使用ajax时JsonResponse直接返回页面-没有回调"><a href="#使用ajax时JsonResponse直接返回页面-没有回调" class="headerlink" title="使用ajax时JsonResponse直接返回页面,没有回调"></a>使用ajax时JsonResponse直接返回页面,没有回调</h1><p>使用ajax时不能和input的submit一起使用</p>
+<h1 id="Django无法导入jQuery报错-the-server-responded-with-a-status-of-404"><a href="#Django无法导入jQuery报错-the-server-responded-with-a-status-of-404" class="headerlink" title="Django无法导入jQuery报错:the server responded with a status of 404"></a>Django无法导入jQuery报错:the server responded with a status of 404</h1><p>在setting文件中添加</p>
+<pre><code>STASTICFILES_DIRS = [os.path.join(BASE_DIR, &apos;stastic&apos;)] #&apos;stastic&apos;为在项目目录下创建的静态文件夹</code></pre><h1 id="在a标签中提交表单"><a href="#在a标签中提交表单" class="headerlink" title="在a标签中提交表单"></a>在a标签中提交表单</h1><pre><code>&lt;form action=&quot;&quot; id=&apos;form1&apos;&gt;...&lt;/form&gt;
 
-[install]
-trusted-host = pypi.douban.com</code></pre></li>
-</ol>
-<h3 id="Linux和Mac系统配置"><a href="#Linux和Mac系统配置" class="headerlink" title="Linux和Mac系统配置"></a>Linux和Mac系统配置</h3><ol>
-<li><p>打开终端</p>
-</li>
-<li><p>输入命令:</p>
-<pre><code>mkdir .pip
-vim .pip/pip.conf</code></pre></li>
-<li><p>在文件中输入:</p>
-<pre><code>[global]
-index-url = https://pypi.doubanio.com/simple/
-timeout = 1000
-[install]
-use-mirrors = true
-mirrors = https://pypi.doubanio.com//</code></pre></li>
-</ol>
+&lt;a href=&apos;javascript:;&apos; onclice=&apos;document:form1.submit()&apos;&gt;...&lt;/a&gt;</code></pre><h1 id="views中函数取cookie时键名不存在报错"><a href="#views中函数取cookie时键名不存在报错" class="headerlink" title="views中函数取cookie时键名不存在报错"></a>views中函数取cookie时键名不存在报错</h1><p>先检查键名是否存在与cookie中,若存在再取</p>
+<pre><code>if 键名 in request.COOKIES:
 
+    pass</code></pre>
     </div>
 
     
@@ -266,7 +256,7 @@ mirrors = https://pypi.doubanio.com//</code></pre></li>
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/pip/" rel="tag"># pip</a>
+              <a href="/tags/Django/" rel="tag"># Django</a>
           </div>
 
         
@@ -275,13 +265,10 @@ mirrors = https://pypi.doubanio.com//</code></pre></li>
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/11/24/ACM%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" rel="prev" title="ACM基础算法">
-      <i class="fa fa-chevron-left"></i> ACM基础算法
+    <a href="/2020/12/01/Django%E6%A1%86%E6%9E%B6%E7%AC%94%E8%AE%B0/" rel="prev" title="Django框架笔记">
+      <i class="fa fa-chevron-left"></i> Django框架笔记
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/12/01/Django%E6%A1%86%E6%9E%B6%E7%AC%94%E8%AE%B0/" rel="next" title="Django框架笔记">
-      Django框架笔记 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -341,7 +328,7 @@ mirrors = https://pypi.doubanio.com//</code></pre></li>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%B4%E6%97%B6%E6%8F%90%E9%80%9F"><span class="nav-number">1.</span> <span class="nav-text">临时提速</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B0%B8%E4%B9%85%E6%8F%90%E9%80%9F"><span class="nav-number">2.</span> <span class="nav-text">永久提速</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#windows%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE"><span class="nav-number">2.0.1.</span> <span class="nav-text">windows系统配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux%E5%92%8CMac%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE"><span class="nav-number">2.0.2.</span> <span class="nav-text">Linux和Mac系统配置</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8source-%E5%91%BD%E4%BB%A4%E6%97%B6%E6%8F%90%E7%A4%BA%E5%91%BD%E4%BB%A4%E4%B8%8D%E5%AD%98%E5%9C%A8"><span class="nav-number">1.</span> <span class="nav-text">使用source 命令时提示命令不存在</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#post%E8%AF%B7%E6%B1%82%E6%97%B6403%E9%94%99%E8%AF%AF"><span class="nav-number">2.</span> <span class="nav-text">post请求时403错误</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8ajax%E6%97%B6%E6%8A%A5%E9%94%99-TypeError-ajax-%E2%80%A6-success-is-not-a-function"><span class="nav-number">3.</span> <span class="nav-text">使用ajax时报错:TypeError: $.ajax(…) success is not a function</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8%E8%A7%86%E5%9B%BE%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%9E%8B%E6%9F%A5%E8%AF%A2%E6%97%B6%E6%8A%A5%E9%94%99-%E2%80%99str%E2%80%99-object-has-no-attribute-%E2%80%98objects%E2%80%99"><span class="nav-number">4.</span> <span class="nav-text">在视图中使用模型查询时报错:’str’ object has no attribute ‘objects’</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8ajax%E6%97%B6JsonResponse%E7%9B%B4%E6%8E%A5%E8%BF%94%E5%9B%9E%E9%A1%B5%E9%9D%A2-%E6%B2%A1%E6%9C%89%E5%9B%9E%E8%B0%83"><span class="nav-number">5.</span> <span class="nav-text">使用ajax时JsonResponse直接返回页面,没有回调</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Django%E6%97%A0%E6%B3%95%E5%AF%BC%E5%85%A5jQuery%E6%8A%A5%E9%94%99-the-server-responded-with-a-status-of-404"><span class="nav-number">6.</span> <span class="nav-text">Django无法导入jQuery报错:the server responded with a status of 404</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8a%E6%A0%87%E7%AD%BE%E4%B8%AD%E6%8F%90%E4%BA%A4%E8%A1%A8%E5%8D%95"><span class="nav-number">7.</span> <span class="nav-text">在a标签中提交表单</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#views%E4%B8%AD%E5%87%BD%E6%95%B0%E5%8F%96cookie%E6%97%B6%E9%94%AE%E5%90%8D%E4%B8%8D%E5%AD%98%E5%9C%A8%E6%8A%A5%E9%94%99"><span class="nav-number">8.</span> <span class="nav-text">views中函数取cookie时键名不存在报错</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
