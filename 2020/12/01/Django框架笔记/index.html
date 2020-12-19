@@ -28,7 +28,7 @@
 <meta property="og:description" content="环境搭建  虚拟环境的创建和使用  安装虚拟环境">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-12-01T14:29:43.000Z">
-<meta property="article:modified_time" content="2020-12-13T18:46:35.404Z">
+<meta property="article:modified_time" content="2020-12-16T01:29:27.655Z">
 <meta property="article:author" content="何世龙">
 <meta property="article:tag" content="Django">
 <meta name="twitter:card" content="summary">
@@ -197,7 +197,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-14 02:46:35" itemprop="dateModified" datetime="2020-12-14T02:46:35+08:00">2020-12-14</time>
+                <time title="修改时间：2020-12-16 09:29:27" itemprop="dateModified" datetime="2020-12-16T09:29:27+08:00">2020-12-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -421,10 +421,9 @@ mkdir booktest</code></pre></li>
 </ol>
 </li>
 <li><p><strong>给模板文件传递数据</strong></p>
-<p>  模板变量使用:{\{模板变量名}\}</p>
-<p>  模板代码段:{\%代码段\%}</p>
-<p>  for循环-{\%for i in \%} {\% endfor \%}</p>
-<p>  <em>\站位符,代码中要去掉</em></p>
+<p>  模板变量使用:&#123;&#123;模板变量名&#125;&#125;</p>
+<p>  模板代码段:&#123;%代码段%&#125;</p>
+<p>  for循环-&#123;%for i in %&#125; &#123;% endfor %&#125;</p>
 </li>
 </ul>
 <blockquote>
@@ -943,7 +942,7 @@ def ajax_test(request):
 
     response = render(request,&apos;/books/index.html&apos;)
 
-    response.set_cookie(&#123;&apos;user&apos;:&apos;Kiritsugu&apos;&#125;)
+    response.set_cookie(&#123;&apos;user&apos;:&apos;Kiritsugu&apos;&#125;,max_age=30) # max_age设置cookie过期时间,以秒为单位
 
     return response</code></pre></li>
 <li><p><strong>cookie获取</strong></p>
@@ -991,6 +990,115 @@ def ajax_test(request):
         user = &apos;&apos;
 
     return render(request,&apos;books/index.html&apos;,&#123;&apos;user&apos;:user&#125;)</code></pre></li>
+<li><p><strong>对象及方法</strong></p>
+<ol>
+<li><p>以键值对的格式写session</p>
+<p> request.session[‘键’]=值</p>
+</li>
+<li><p>根据键读取值</p>
+<p> request.session.get(‘键’,默认值)</p>
+</li>
+<li><p>清除所有session,在存储中删除值的部分</p>
+<p> request.session.clear()</p>
+</li>
+<li><p>清除session数据,在存储中删除session的整条数据</p>
+<p> request.session.flush()</p>
+</li>
+<li><p>删除session中的指定键及值,在存储中只删除某个键键及对应的值</p>
+<p> del request.session[‘键’]</p>
+</li>
+<li><p>设置会话的超时时间,如果没有指定过期时间则两个星期后过期</p>
+<p> request.session.set_expiry(value)</p>
+</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<h2 id="cookie和session的应用场景"><a href="#cookie和session的应用场景" class="headerlink" title="cookie和session的应用场景"></a>cookie和session的应用场景</h2></blockquote>
+<p>cookie:记住用户名.安全性要求不高</p>
+<p>session:涉及到安全性要求高的数据.银行卡账户,密码</p>
+<blockquote>
+<h1 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h1></blockquote>
+<blockquote>
+<h2 id="模板功能"><a href="#模板功能" class="headerlink" title="模板功能"></a>模板功能</h2></blockquote>
+<p>产生html,控制页面上展示的内容,模板文件不仅仅不是一个html文件</p>
+<p>模板文件包含两个部分:</p>
+<ol>
+<li><p>静态文件:css,js,html</p>
+</li>
+<li><p>动态文件:用于动态去产生一些网页内容,有模板语言来产生</p>
+</li>
+</ol>
+<blockquote>
+<h2 id="模板文件的使用"><a href="#模板文件的使用" class="headerlink" title="模板文件的使用"></a>模板文件的使用</h2></blockquote>
+<p>通常是在视图函数中使用模板产生html内容返回给客户端</p>
+<ol>
+<li><p>加载模板文件 loader.get_template</p>
+<p> 获取模板文件内容,产生一个模板对象</p>
+</li>
+<li><p>定义模板上下文 RequestContext</p>
+<p> 给模板文件传递数据</p>
+</li>
+<li><p>模板渲染产生html页面内容 render</p>
+<p> 用传递的数据替换相应的变量,产生一个替换后的表中html内容</p>
+</li>
+</ol>
+<blockquote>
+<h2 id="模板文件加载顺序"><a href="#模板文件加载顺序" class="headerlink" title="模板文件加载顺序"></a>模板文件加载顺序</h2></blockquote>
+<ol>
+<li><p>首先去配置的模板录下面去找模板文件</p>
+</li>
+<li><p>去INS_APPS下面的每个应用去找模板文件,前提是必须有templates文件夹</p>
+</li>
+</ol>
+<blockquote>
+<h2 id="模板语言"><a href="#模板语言" class="headerlink" title="模板语言"></a>模板语言</h2></blockquote>
+<ul>
+<li><p><strong>模板变量</strong></p>
+<p>  模板变量名室友数字,字母,下划线和点组成的,不能以下划线开头</p>
+<p>  使用模板变量:&#123;{模板变量名}&#125;</p>
+<p>  模板变量的解析顺序:</p>
+<p>  例如:&#123;{book.btitle}&#125;</p>
+<ol>
+<li><p>首先把book当成一个字典,把btitle当成键名,进行取值book[‘btitle’]</p>
+</li>
+<li><p>把book当成一个对象,把btitle当成属性,进行取值book.btitle</p>
+</li>
+<li><p>把book当成一个对象,把btitle当成对象方法,进行取值book.btitle</p>
+</li>
+</ol>
+</li>
+<li><p><strong>模板标签</strong></p>
+<p>  &#123;% 代码段 %&#125;</p>
+<p>  for循环:</p>
+<pre><code>&#123;% for x in 列表 %&#125;
+
+# 列表不为空时执行
+
+&#123;% empty %&#125;
+
+# 列表为空时执行
+
+&#123;% endfor %&#125;
+
+可以通过&#123;&#123; forloop.counter &#125;&#125; 得到当前循环的次数</code></pre><p>  if判断:</p>
+<pre><code>&#123;% if 条件 %&#125;
+
+&#123;% elif 条件 %&#125;
+
+&#123;% else %&#125;
+
+&#123;% endif %&#125;</code></pre><p>  关系比较操作符: &gt;,&lt;,&gt;=,&lt;=,==,!=</p>
+<p>  <em>注意:进行比较操作时,比较操作符两边必须有空格</em></p>
+<p>  逻辑运行符:not,and,or</p>
+</li>
+<li><p><strong>过滤器</strong></p>
+<p>  过滤器用于对模板变量进行操作</p>
+<p>  date:改变日期的显示格式</p>
+<p>  length:求长度(字符串,列表,元组及字典长度)</p>
+<p>  default:设置模板变量的默认值</p>
+<p>  格式: 模板变量 | 过滤器:参数</p>
+</li>
 </ul>
 
     </div>
@@ -1014,7 +1122,7 @@ def ajax_test(request):
       <i class="fa fa-chevron-left"></i> 提升pip安装库的速度
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/12/11/Django%E6%8A%A5%E9%94%99%E5%8F%8A%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" rel="next" title="Django报错记录">
+    <a href="/2020/12/11/Django%E6%8A%A5%E9%94%99%E8%AE%B0%E5%BD%95/" rel="next" title="Django报错记录">
       Django报错记录 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -1076,7 +1184,7 @@ def ajax_test(request):
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">1.</span> <span class="nav-text">环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E7%9A%84%E5%88%9B%E5%BB%BA%E5%92%8C%E4%BD%BF%E7%94%A8"><span class="nav-number">1.1.</span> <span class="nav-text">虚拟环境的创建和使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Django%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%BA%94%E7%94%A8%E5%88%9B%E5%BB%BA"><span class="nav-number">1.2.</span> <span class="nav-text">Django项目和应用创建</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Django%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">Django的基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E7%B1%BB%E8%AE%BE%E8%AE%A1%E5%92%8C%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E7%94%9F%E6%88%90"><span class="nav-number">2.1.</span> <span class="nav-text">模型类设计和数据表的生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%A8%A1%E5%9E%8B%E7%B1%BB%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">通过模型类操作数据表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Django%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86"><span class="nav-number">2.3.</span> <span class="nav-text">Django后台管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE%E4%BD%BF%E7%94%A8"><span class="nav-number">2.4.</span> <span class="nav-text">视图使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E4%BD%BF%E7%94%A8"><span class="nav-number">2.5.</span> <span class="nav-text">模板使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVT%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B"><span class="nav-number">2.6.</span> <span class="nav-text">MVT综合案例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Django%E9%85%8D%E7%BD%AEMySQL%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">3.1.</span> <span class="nav-text">Django配置MySQL数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B5%E9%9D%A2%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-number">3.2.</span> <span class="nav-text">页面重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E6%AE%B5%E5%B1%9E%E6%80%A7%E5%92%8C%E9%80%89%E9%A1%B9"><span class="nav-number">3.3.</span> <span class="nav-text">字段属性和选项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2"><span class="nav-number">3.4.</span> <span class="nav-text">查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E5%85%B3%E7%B3%BB%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C"><span class="nav-number">3.5.</span> <span class="nav-text">模型关系及相关操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E5%99%A8"><span class="nav-number">3.6.</span> <span class="nav-text">管理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%83%E9%80%89%E9%A1%B9"><span class="nav-number">3.7.</span> <span class="nav-text">元选项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE"><span class="nav-number">4.</span> <span class="nav-text">视图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE%E5%8A%9F%E8%83%BD"><span class="nav-number">4.1.</span> <span class="nav-text">视图功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8%E5%8F%8Aurl%E9%85%8D%E7%BD%AE"><span class="nav-number">4.2.</span> <span class="nav-text">视图函数的使用及url配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E8%A7%86%E5%9B%BE"><span class="nav-number">4.3.</span> <span class="nav-text">错误视图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4"><span class="nav-number">4.4.</span> <span class="nav-text">表单提交</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ajax%E8%AF%B7%E6%B1%82"><span class="nav-number">4.5.</span> <span class="nav-text">ajax请求</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cookie%E4%B8%8Esession"><span class="nav-number">5.</span> <span class="nav-text">cookie与session</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E4%BF%9D%E6%8C%81"><span class="nav-number">5.1.</span> <span class="nav-text">状态保持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie"><span class="nav-number">5.2.</span> <span class="nav-text">cookie</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#session"><span class="nav-number">5.3.</span> <span class="nav-text">session</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">1.</span> <span class="nav-text">环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E7%9A%84%E5%88%9B%E5%BB%BA%E5%92%8C%E4%BD%BF%E7%94%A8"><span class="nav-number">1.1.</span> <span class="nav-text">虚拟环境的创建和使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Django%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%BA%94%E7%94%A8%E5%88%9B%E5%BB%BA"><span class="nav-number">1.2.</span> <span class="nav-text">Django项目和应用创建</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Django%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">Django的基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E7%B1%BB%E8%AE%BE%E8%AE%A1%E5%92%8C%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E7%94%9F%E6%88%90"><span class="nav-number">2.1.</span> <span class="nav-text">模型类设计和数据表的生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%A8%A1%E5%9E%8B%E7%B1%BB%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">通过模型类操作数据表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Django%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86"><span class="nav-number">2.3.</span> <span class="nav-text">Django后台管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE%E4%BD%BF%E7%94%A8"><span class="nav-number">2.4.</span> <span class="nav-text">视图使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E4%BD%BF%E7%94%A8"><span class="nav-number">2.5.</span> <span class="nav-text">模板使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVT%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B"><span class="nav-number">2.6.</span> <span class="nav-text">MVT综合案例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Django%E9%85%8D%E7%BD%AEMySQL%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">3.1.</span> <span class="nav-text">Django配置MySQL数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B5%E9%9D%A2%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-number">3.2.</span> <span class="nav-text">页面重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E6%AE%B5%E5%B1%9E%E6%80%A7%E5%92%8C%E9%80%89%E9%A1%B9"><span class="nav-number">3.3.</span> <span class="nav-text">字段属性和选项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2"><span class="nav-number">3.4.</span> <span class="nav-text">查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E5%85%B3%E7%B3%BB%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C"><span class="nav-number">3.5.</span> <span class="nav-text">模型关系及相关操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E5%99%A8"><span class="nav-number">3.6.</span> <span class="nav-text">管理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%83%E9%80%89%E9%A1%B9"><span class="nav-number">3.7.</span> <span class="nav-text">元选项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE"><span class="nav-number">4.</span> <span class="nav-text">视图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE%E5%8A%9F%E8%83%BD"><span class="nav-number">4.1.</span> <span class="nav-text">视图功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8%E5%8F%8Aurl%E9%85%8D%E7%BD%AE"><span class="nav-number">4.2.</span> <span class="nav-text">视图函数的使用及url配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E8%A7%86%E5%9B%BE"><span class="nav-number">4.3.</span> <span class="nav-text">错误视图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4"><span class="nav-number">4.4.</span> <span class="nav-text">表单提交</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ajax%E8%AF%B7%E6%B1%82"><span class="nav-number">4.5.</span> <span class="nav-text">ajax请求</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cookie%E4%B8%8Esession"><span class="nav-number">5.</span> <span class="nav-text">cookie与session</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E4%BF%9D%E6%8C%81"><span class="nav-number">5.1.</span> <span class="nav-text">状态保持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie"><span class="nav-number">5.2.</span> <span class="nav-text">cookie</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#session"><span class="nav-number">5.3.</span> <span class="nav-text">session</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie%E5%92%8Csession%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">5.4.</span> <span class="nav-text">cookie和session的应用场景</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF"><span class="nav-number">6.</span> <span class="nav-text">模板</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E5%8A%9F%E8%83%BD"><span class="nav-number">6.1.</span> <span class="nav-text">模板功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E6%96%87%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">6.2.</span> <span class="nav-text">模板文件的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E6%96%87%E4%BB%B6%E5%8A%A0%E8%BD%BD%E9%A1%BA%E5%BA%8F"><span class="nav-number">6.3.</span> <span class="nav-text">模板文件加载顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E8%AF%AD%E8%A8%80"><span class="nav-number">6.4.</span> <span class="nav-text">模板语言</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
