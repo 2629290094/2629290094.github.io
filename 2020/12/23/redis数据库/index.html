@@ -28,7 +28,7 @@
 <meta property="og:description" content="nosql介绍 NoSQL:一类新出现的数据库(not only sql),它的特点:  不支持SQL语法  存储结构跟传统关系型数据库中的那种关系表完全不同,nosql中存储的数据都是KV形式  NoSQL的世界中没有一种通用的语言,每种nosql数据库都有自己的api和语法,以及擅长的业务场景">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-12-23T13:43:26.000Z">
-<meta property="article:modified_time" content="2020-12-23T16:30:47.226Z">
+<meta property="article:modified_time" content="2020-12-26T09:41:35.803Z">
 <meta property="article:author" content="何世龙">
 <meta property="article:tag" content="没有明天,活在当下">
 <meta name="twitter:card" content="summary">
@@ -197,7 +197,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-24 00:30:47" itemprop="dateModified" datetime="2020-12-24T00:30:47+08:00">2020-12-24</time>
+                <time title="修改时间：2020-12-26 17:41:35" itemprop="dateModified" datetime="2020-12-26T17:41:35+08:00">2020-12-26</time>
               </span>
 
           
@@ -258,7 +258,9 @@
 <li><p>在一些大型系统中,巧妙地实现一些特定功能–session共享,购物车</p>
 </li>
 </ul>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
+<blockquote>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1></blockquote>
+<ul>
 <li><p>下载Redis压缩包</p>
 <pre><code>wget http://download.redis.io/releases/redis-4.0.9.tar.gz</code></pre></li>
 <li><p>解压</p>
@@ -292,7 +294,9 @@ ls -a</code></pre><ol>
 <li><p>配置文件,移动到/etc/目录下</p>
 <pre><code>sudo cp /usr/local/redis/redis.conf /etc/redis/redis.conf</code></pre></li>
 </ul>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>redis的配置信息在/etc/redis/redis.conf</p>
+<blockquote>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1></blockquote>
+<p>redis的配置信息在/etc/redis/redis.conf</p>
 <p><strong>核心配置选项</strong></p>
 <ul>
 <li><p>绑定ip: 如果需要远程访问,可将此行注释,或绑定一个真实ip</p>
@@ -317,6 +321,391 @@ ls -a</code></pre><ol>
 <pre><code>dir /var/lib/redis</code></pre></li>
 <li><p>日志文件</p>
 <pre><code>logfile /var/log/redis/redis-server.log</code></pre></li>
+<li><p>数据库,默认有16个</p>
+<pre><code>database 16</code></pre></li>
+<li><p>主从复制,类似于双机备份</p>
+<pre><code>slaveof</code></pre></li>
+</ul>
+<blockquote>
+<h1 id="服务器端和客户端命令"><a href="#服务器端和客户端命令" class="headerlink" title="服务器端和客户端命令"></a>服务器端和客户端命令</h1></blockquote>
+<blockquote>
+<h2 id="服务器端"><a href="#服务器端" class="headerlink" title="服务器端"></a>服务器端</h2></blockquote>
+<ul>
+<li><p>ps aux | grep redis 查看redis服务器进程</p>
+</li>
+<li><p>sudo kill -9 pid 杀死redis服务器</p>
+</li>
+<li><p>sudo redis-server /etc/redis/redis.conf 指定加载的配置文件</p>
+</li>
+</ul>
+<blockquote>
+<h2 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h2></blockquote>
+<ul>
+<li><p>redis-cli 连接redis</p>
+</li>
+<li><p>ping 运行测试</p>
+</li>
+<li><p>select n 切换数据库</p>
+</li>
+</ul>
+<blockquote>
+<h1 id="数据操作"><a href="#数据操作" class="headerlink" title="数据操作"></a>数据操作</h1></blockquote>
+<blockquote>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2></blockquote>
+<ul>
+<li><p>redis是key-value的数据结构,每条数据都是一个键值对</p>
+</li>
+<li><p>键的类型是字符串</p>
+</li>
+<li><p>键不能重复</p>
+</li>
+<li><p>值的类型分为五种</p>
+<ol>
+<li><p>字符串string</p>
+</li>
+<li><p>哈希hash</p>
+</li>
+<li><p>列表list</p>
+</li>
+<li><p>集合set</p>
+</li>
+<li><p>有序集合zset</p>
+</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<h2 id="string"><a href="#string" class="headerlink" title="string"></a>string</h2></blockquote>
+<h3 id="保存"><a href="#保存" class="headerlink" title="保存"></a>保存</h3><p>如果设置的键不存在则为添加,如果设置的键已经存在则修改</p>
+<ul>
+<li><p>设置键值</p>
+<pre><code>set key value</code></pre></li>
+<li><p>例1 设置键为name值为itcast的数据</p>
+<pre><code>set name itcast
+
+get name
+
+set name iteima
+
+get name</code></pre></li>
+<li><p>设置键值及过期时间,以秒为单位</p>
+<pre><code>setex key seconds value</code></pre></li>
+<li><p>例2 设置键为aa值为aa过期时间为3秒的数据</p>
+</li>
+<li><p>设置多个键值</p>
+<pre><code>mset key1 value1 key2 value2</code></pre></li>
+<li><p>追加值</p>
+<pre><code>append key value</code></pre></li>
+</ul>
+<h3 id="获取"><a href="#获取" class="headerlink" title="获取"></a>获取</h3><ul>
+<li><p>根据键获取值,如果不存在此键则返回nil</p>
+<pre><code>get key</code></pre></li>
+<li><p>根据多个键获取多个值</p>
+<pre><code>mget key1 key2</code></pre></li>
+</ul>
+<blockquote>
+<h2 id="键命令"><a href="#键命令" class="headerlink" title="键命令"></a>键命令</h2></blockquote>
+<ul>
+<li><p>查找键,参数支持正则表达式</p>
+<pre><code>keys pattem</code></pre></li>
+<li><p>例1: 查看所有键</p>
+<pre><code>keys *</code></pre></li>
+<li><p>例2: 查看名称中包含a的键</p>
+<pre><code>keys &apos;a*&apos;</code></pre></li>
+<li><p>判断键是否存在,如果存在范湖1,不存在返回0</p>
+<pre><code>exsits key1</code></pre></li>
+<li><p>查看键对应的value的类型</p>
+<pre><code>type key</code></pre></li>
+<li><p>删除键及对应的值</p>
+<pre><code>del key1 key2</code></pre></li>
+<li><p>设置过期时间,以秒为单位</p>
+<pre><code>expire key seconds</code></pre></li>
+<li><p>查看有效时间,以秒为单位</p>
+<pre><code>ttl key</code></pre></li>
+</ul>
+<blockquote>
+<h2 id="hash"><a href="#hash" class="headerlink" title="hash"></a>hash</h2></blockquote>
+<ul>
+<li><p>用于存储对象,对象结构为属性,值</p>
+</li>
+<li><p>值为类型为string</p>
+</li>
+</ul>
+<h3 id="增加修改"><a href="#增加修改" class="headerlink" title="增加修改"></a>增加修改</h3><ul>
+<li><p>设置单个属性</p>
+<pre><code>hset key field value</code></pre></li>
+<li><p>例1: 设置键user的属性name为itheima</p>
+<pre><code>hset user name itheima</code></pre></li>
+<li><p>设置多个属性</p>
+<pre><code>hmset key field1 value 1 field2 value2</code></pre></li>
+</ul>
+<h3 id="获取-1"><a href="#获取-1" class="headerlink" title="获取"></a>获取</h3><ul>
+<li><p>获取指定键所有的属性</p>
+<pre><code>hkeys key</code></pre></li>
+<li><p>获取一个属性的值</p>
+<pre><code>hget key field</code></pre></li>
+<li><p>获取多个属性的值</p>
+<pre><code>hmget key field1 field2</code></pre></li>
+<li><p>获取所有属性的值</p>
+<pre><code>hvals key</code></pre></li>
+</ul>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><ul>
+<li><p>删除整个hash键及值,使用del</p>
+</li>
+<li><p>删除属性,属性对应的值会被一起删除</p>
+<pre><code>hdel key field1 field2</code></pre></li>
+</ul>
+<blockquote>
+<h2 id="list"><a href="#list" class="headerlink" title="list"></a>list</h2></blockquote>
+<ul>
+<li><p>列表的元素类型为string</p>
+</li>
+<li><p>按照插入顺序排序</p>
+</li>
+</ul>
+<h3 id="增加"><a href="#增加" class="headerlink" title="增加"></a>增加</h3><ul>
+<li><p>在左侧插入数据</p>
+<pre><code>lpush key value1 value2</code></pre></li>
+<li><p>在右侧插入数据</p>
+<pre><code>rpush key value1 value2</code></pre></li>
+<li><p>在指定元素的前后插入新元素</p>
+<pre><code>linsert key before 或 after 指定元素 新元素</code></pre></li>
+</ul>
+<h3 id="获取-2"><a href="#获取-2" class="headerlink" title="获取"></a>获取</h3><ul>
+<li><p>返回列表里指定范围内的元素</p>
+<ol>
+<li><p>start,stop 为元素下标索引</p>
+</li>
+<li><p>索引从左侧开始,第一个元素为0 </p>
+</li>
+<li><p>索引可以是负数,表示从尾部开始计算,如-1表示最后一个元素</p>
+<pre><code>lrange key start stop</code></pre></li>
+</ol>
+</li>
+</ul>
+<h3 id="设置指定索引位置的元素值"><a href="#设置指定索引位置的元素值" class="headerlink" title="设置指定索引位置的元素值"></a>设置指定索引位置的元素值</h3><pre><code>lset key index value</code></pre><h3 id="删除-1"><a href="#删除-1" class="headerlink" title="删除"></a>删除</h3><ul>
+<li><p>删除指定元素</p>
+<ol>
+<li><p>将列表中钱count次出现的值为value的元素移除</p>
+</li>
+<li><p>count &gt; 0:从头往后移除</p>
+</li>
+<li><p>count &lt; 0:从尾往头移除</p>
+</li>
+<li><p>count == 0:移除所有</p>
+<pre><code>lrem key key count value</code></pre></li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<h2 id="set"><a href="#set" class="headerlink" title="set"></a>set</h2></blockquote>
+<ul>
+<li><p>无序集合</p>
+</li>
+<li><p>元素为string类型</p>
+</li>
+<li><p>元素具有唯一性,不重复</p>
+</li>
+<li><p>对于集合没有修改操作</p>
+</li>
+</ul>
+<h3 id="增加-1"><a href="#增加-1" class="headerlink" title="增加"></a>增加</h3><ul>
+<li><p>添加元素</p>
+<pre><code>sadd key key member1 member2</code></pre></li>
+</ul>
+<h3 id="获取-3"><a href="#获取-3" class="headerlink" title="获取"></a>获取</h3><ul>
+<li><p>获取所有元素</p>
+<pre><code>smembers key</code></pre></li>
+</ul>
+<h3 id="删除-2"><a href="#删除-2" class="headerlink" title="删除"></a>删除</h3><ul>
+<li><p>删除指定元素</p>
+<pre><code>srem key value1 value2</code></pre></li>
+</ul>
+<blockquote>
+<h2 id="zset"><a href="#zset" class="headerlink" title="zset"></a>zset</h2></blockquote>
+<ul>
+<li><p>sorted set,有序集合</p>
+</li>
+<li><p>元素为string类型</p>
+</li>
+<li><p>元素具有唯一性,不重复</p>
+</li>
+<li><p>每个元素都会关联一个double类型的score,表示权重,通过权重将元素从小到大排序</p>
+</li>
+<li><p>没有修改操作</p>
+</li>
+</ul>
+<h3 id="增加-2"><a href="#增加-2" class="headerlink" title="增加"></a>增加</h3><ul>
+<li><p>添加</p>
+<pre><code>zadd key score1 member1 score2 member2</code></pre></li>
+</ul>
+<h3 id="获取-4"><a href="#获取-4" class="headerlink" title="获取"></a>获取</h3><ul>
+<li><p>获取所有元素</p>
+<pre><code>zrange key start stop</code></pre></li>
+<li><p>获取score值在min和max之间的元素</p>
+<pre><code>zrangebyscore key min max</code></pre></li>
+<li><p>获取成员member的score值</p>
+<pre><code>zscore key member</code></pre></li>
+</ul>
+<h3 id="删除-3"><a href="#删除-3" class="headerlink" title="删除"></a>删除</h3><ul>
+<li><p>删除指定元素</p>
+<pre><code>zrem key member1 member2</code></pre></li>
+<li><p>删除权重在min和max之前的元素</p>
+<pre><code>zremrangebyscore key min max</code></pre></li>
+</ul>
+<blockquote>
+<h1 id="与python交互"><a href="#与python交互" class="headerlink" title="与python交互"></a>与python交互</h1></blockquote>
+<blockquote>
+<h2 id="安装包"><a href="#安装包" class="headerlink" title="安装包"></a>安装包</h2></blockquote>
+<ul>
+<li><p>进入虚拟环境</p>
+</li>
+<li><p>安装redis模块</p>
+<pre><code>pip install redis</code></pre></li>
+</ul>
+<blockquote>
+<h2 id="调用模块"><a href="#调用模块" class="headerlink" title="调用模块"></a>调用模块</h2></blockquote>
+<ul>
+<li><p>引入模块</p>
+<pre><code>from redis import *</code></pre></li>
+<li><p>这个模块中提供了StrictRedis对象(Strict严格),用于连接redis服务器,并按照不同类型提供了不同方案,进行交互操作</p>
+</li>
+</ul>
+<blockquote>
+<h2 id="StrictRedis对象方法"><a href="#StrictRedis对象方法" class="headerlink" title="StrictRedis对象方法"></a>StrictRedis对象方法</h2></blockquote>
+<ul>
+<li><p>通过init创建对象,指定参数host,port与指定的服务器和接口连接,host默认为localhost,port默认为6379,db默认为0</p>
+<pre><code>sr = StrictRedis(host = &apos;localhost&apos;,port = 6379,db = 0)
+
+sr = StrictRedis()</code></pre></li>
+<li><p>根据不同的类型,拥有不同的实例方法可以调用,与前面说的redis命令对应,方法需要的参数与命令的参数一至</p>
+<ol>
+<li><p>string</p>
+<ul>
+<li><p>set</p>
+</li>
+<li><p>setex</p>
+</li>
+<li><p>mset</p>
+</li>
+<li><p>append</p>
+</li>
+<li><p>get</p>
+</li>
+<li><p>mget</p>
+</li>
+<li><p>key</p>
+</li>
+</ul>
+</li>
+<li><p>keys</p>
+<ul>
+<li><p>exists</p>
+</li>
+<li><p>type</p>
+</li>
+<li><p>delete</p>
+</li>
+<li><p>expire</p>
+</li>
+<li><p>getrange</p>
+</li>
+<li><p>ttl</p>
+</li>
+</ul>
+</li>
+<li><p>hash</p>
+<ul>
+<li><p>hset</p>
+</li>
+<li><p>hmset</p>
+</li>
+<li><p>hkeys</p>
+</li>
+<li><p>hget</p>
+</li>
+<li><p>hmget</p>
+</li>
+<li><p>hvals</p>
+</li>
+<li><p>hdel</p>
+</li>
+</ul>
+</li>
+<li><p>list</p>
+<ul>
+<li><p>lpush</p>
+</li>
+<li><p>rpush</p>
+</li>
+<li><p>linsert</p>
+</li>
+<li><p>lrange</p>
+</li>
+<li><p>lset</p>
+</li>
+<li><p>lrem</p>
+</li>
+</ul>
+</li>
+<li><p>set</p>
+<ul>
+<li><p>sadd</p>
+</li>
+<li><p>smembers</p>
+</li>
+<li><p>srem</p>
+</li>
+</ul>
+</li>
+<li><p>zset</p>
+<ul>
+<li><p>zadd</p>
+</li>
+<li><p>zrange</p>
+</li>
+<li><p>zrangebyscore</p>
+</li>
+<li><p>zscore</p>
+</li>
+<li><p>zrem</p>
+</li>
+<li><p>zremrangebyscore</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>参考文件</p>
+<p>  <a target="_blank" rel="noopener" href="https://www.cnblogs.com/cnkai/p/7642787.html">https://www.cnblogs.com/cnkai/p/7642787.html</a></p>
+</li>
+</ul>
+<blockquote>
+<h2 id="Django"><a href="#Django" class="headerlink" title="Django"></a>Django</h2></blockquote>
+<h3 id="Django存储session"><a href="#Django存储session" class="headerlink" title="Django存储session"></a>Django存储session</h3><ul>
+<li>之前的Django的session默认是存在数据库里的,我们也可以把session存储在Redis里面</li>
+</ul>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ul>
+<li><p>创建Django项目和应用</p>
+</li>
+<li><p>配置url</p>
+</li>
+</ul>
+<h3 id="session的redis存储配置"><a href="#session的redis存储配置" class="headerlink" title="session的redis存储配置"></a>session的redis存储配置</h3><ul>
+<li><p>安装包</p>
+<pre><code>pip3 install django-redis-sessions</code></pre></li>
+<li><p>在setting.py中配置使用redis</p>
+<pre><code>SESSION_ENGINE = &apos;redis_sessions.session&apos;
+
+SESSION_REDIS_HOST = &apos;localhost&apos;
+
+SESSION_REDIS_PORT = 6379
+
+SESSION_REDIS_DB = 0
+
+SESSION_REDIS_PASSWORD = &apos;&apos;
+
+SESSION_REDIS_PREFIX = &apos;session&apos;</code></pre></li>
 </ul>
 
     </div>
@@ -396,7 +785,7 @@ ls -a</code></pre><ol>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">配置</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%92%8C%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%91%BD%E4%BB%A4"><span class="nav-number">3.</span> <span class="nav-text">服务器端和客户端命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF"><span class="nav-number">3.1.</span> <span class="nav-text">服务器端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">3.2.</span> <span class="nav-text">客户端</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C"><span class="nav-number">4.</span> <span class="nav-text">数据操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">4.1.</span> <span class="nav-text">数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#string"><span class="nav-number">4.2.</span> <span class="nav-text">string</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%9D%E5%AD%98"><span class="nav-number">4.2.1.</span> <span class="nav-text">保存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96"><span class="nav-number">4.2.2.</span> <span class="nav-text">获取</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%AE%E5%91%BD%E4%BB%A4"><span class="nav-number">4.3.</span> <span class="nav-text">键命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hash"><span class="nav-number">4.4.</span> <span class="nav-text">hash</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0%E4%BF%AE%E6%94%B9"><span class="nav-number">4.4.1.</span> <span class="nav-text">增加修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96-1"><span class="nav-number">4.4.2.</span> <span class="nav-text">获取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4"><span class="nav-number">4.4.3.</span> <span class="nav-text">删除</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#list"><span class="nav-number">4.5.</span> <span class="nav-text">list</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0"><span class="nav-number">4.5.1.</span> <span class="nav-text">增加</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96-2"><span class="nav-number">4.5.2.</span> <span class="nav-text">获取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E6%8C%87%E5%AE%9A%E7%B4%A2%E5%BC%95%E4%BD%8D%E7%BD%AE%E7%9A%84%E5%85%83%E7%B4%A0%E5%80%BC"><span class="nav-number">4.5.3.</span> <span class="nav-text">设置指定索引位置的元素值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4-1"><span class="nav-number">4.5.4.</span> <span class="nav-text">删除</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set"><span class="nav-number">4.6.</span> <span class="nav-text">set</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0-1"><span class="nav-number">4.6.1.</span> <span class="nav-text">增加</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96-3"><span class="nav-number">4.6.2.</span> <span class="nav-text">获取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4-2"><span class="nav-number">4.6.3.</span> <span class="nav-text">删除</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zset"><span class="nav-number">4.7.</span> <span class="nav-text">zset</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0-2"><span class="nav-number">4.7.1.</span> <span class="nav-text">增加</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96-4"><span class="nav-number">4.7.2.</span> <span class="nav-text">获取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4-3"><span class="nav-number">4.7.3.</span> <span class="nav-text">删除</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8Epython%E4%BA%A4%E4%BA%92"><span class="nav-number">5.</span> <span class="nav-text">与python交互</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%8C%85"><span class="nav-number">5.1.</span> <span class="nav-text">安装包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E6%A8%A1%E5%9D%97"><span class="nav-number">5.2.</span> <span class="nav-text">调用模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#StrictRedis%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95"><span class="nav-number">5.3.</span> <span class="nav-text">StrictRedis对象方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Django"><span class="nav-number">5.4.</span> <span class="nav-text">Django</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Django%E5%AD%98%E5%82%A8session"><span class="nav-number">5.4.1.</span> <span class="nav-text">Django存储session</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">5.4.2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#session%E7%9A%84redis%E5%AD%98%E5%82%A8%E9%85%8D%E7%BD%AE"><span class="nav-number">5.4.3.</span> <span class="nav-text">session的redis存储配置</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
